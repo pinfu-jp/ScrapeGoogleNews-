@@ -57,7 +57,7 @@ def _scrape_news_page(html: bytes, chrome: webdriver):
 
     return result_dict
 
-def get_href_url(driver: webdriver, anchor_text, wait_sec: int = 60):
+def get_href_url(driver: webdriver, anchor_text):
 
     # 対象要素
     element = driver.find_element(By.LINK_TEXT, anchor_text)
