@@ -1,8 +1,7 @@
 # ScrapeGoogleNews:Google News スクレイピング
 
 - Webスクレイピングの学習用コードです
-- Google News で検索した記事の「タイトル」とURLをJSONファイルに一覧表として出力します
-- [適格請求書発行事業者公表サイト](https://www.invoice-kohyo.nta.go.jp/)をWebスクレイピングしてhtmlから情報を取得しています
+- [Google News](https://news.google.com/home) で検索した記事の「タイトル」とURLをJSONファイルに一覧表として出力します
 
 # サンプルコード
 
