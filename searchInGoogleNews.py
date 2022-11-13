@@ -49,21 +49,18 @@ def _scrape_news_page(html: bytes, session: webdriver):
     h3_list = soup.findAll('h3', class_='ipQwMb ekueJc RD0gLb')
     for h3 in h3_list:
         anchor = h3.find('a')
-        title = anchor.text
-        # url取得
-        url = get_href_url(session, title)
         # タイトル: URL
-        result_dict[title] = url
+        result_dict[anchor.text] = get_anchor_url(session, anchor.text)
 
     return result_dict
 
-def get_href_url(session: webdriver, anchor_text: str):
+def get_anchor_url(session: webdriver, anchor_text: str):
 
     # 対象要素
     element = session.find_element(By.LINK_TEXT, anchor_text)
 
-    attr = element.get_attribute('href')
-    return attr
+    url = element.get_attribute('href')
+    return url
 
 
 def export_dict_to_json(path: str, result_dict: dict):
