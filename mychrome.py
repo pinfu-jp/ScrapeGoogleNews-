@@ -6,7 +6,7 @@ class MyChrome:
     _session: webdriver.Chrome = None
     _options = webdriver.ChromeOptions()
 
-    LOCAL_CHROME_DRIVER_EXE = "C:\\devtool\\chromedriver_win32\\chromedriver.exe"
+    LOCAL_CHROME_DRIVER_EXE = r"C:\devtool\chromedriver_win32\chromedriver.exe"
     # chromedriver.exe は事前にインストールが必要です
     # https://chromedriver.chromium.org/downloads から取得してください
 
