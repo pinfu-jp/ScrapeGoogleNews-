@@ -16,21 +16,21 @@ GOOGLE_NEWS_SEARCH_URL = "https://news.google.com/search"
 # Google ニュースを検索
 def search_in_google_news(keyword: str, outPath: str, headlessMode: bool = True):
 
-    chrome = MyChrome(headlessMode).launch()
+    session = MyChrome(headlessMode).open_session()
 
     url = GOOGLE_NEWS_SEARCH_URL + '?q=' + keyword
-    chrome.get(url)
+    session.get(url)
 
-    html = chrome.page_source.encode('utf-8')
-    result_dict = _scrape_news_page(html, chrome)
+    html = session.page_source.encode('utf-8')
+    result_dict = _scrape_news_page(html, session)
 
-    chrome.close()
-    chrome.quit()
+    session.close()
+    session.quit()
 
     if result_dict:
         export_dict_to_json(outPath, result_dict)
 
-def _scrape_news_page(html: bytes, chrome: webdriver):
+def _scrape_news_page(html: bytes, session: webdriver):
     print("ニュースページのスクレイピング")
 
     soup = BeautifulSoup(html, 'lxml')  # lxml はパーサ
@@ -51,16 +51,16 @@ def _scrape_news_page(html: bytes, chrome: webdriver):
         anchor = h3.find('a')
         title = anchor.text
         # url取得
-        url = get_href_url(chrome, title)
+        url = get_href_url(session, title)
         # タイトル: URL
         result_dict[title] = url
 
     return result_dict
 
-def get_href_url(driver: webdriver, anchor_text):
+def get_href_url(session: webdriver, anchor_text):
 
     # 対象要素
-    element = driver.find_element(By.LINK_TEXT, anchor_text)
+    element = session.find_element(By.LINK_TEXT, anchor_text)
 
     attr = element.get_attribute('href')
     return attr

@@ -3,7 +3,7 @@ import os
 
 class MyChrome:
 
-    _driver: webdriver.Chrome = None
+    _session: webdriver.Chrome = None
     _options = webdriver.ChromeOptions()
 
     LOCAL_CHROME_DRIVER_EXE = "C:\\devtool\\chromedriver_win32\\chromedriver.exe"
@@ -21,11 +21,11 @@ class MyChrome:
 
         super().__init__()
 
-    # Chrome起動
-    def launch(self, wait_sec:int = 30) -> webdriver:
-        self._driver = webdriver.Chrome(MyChrome.LOCAL_CHROME_DRIVER_EXE, options=self._options)
+    # セッション開始
+    def open_session(self, wait_sec:int = 30) -> webdriver:
+        self._session = webdriver.Chrome(MyChrome.LOCAL_CHROME_DRIVER_EXE, options=self._options)
 
         # ロードのタイムアウトを長めにしておく
-        self._driver.implicitly_wait(wait_sec)
+        self._session.implicitly_wait(wait_sec)
 
-        return self._driver
+        return self._session
